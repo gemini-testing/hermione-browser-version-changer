@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const {EventEmitter} = require('events');
+const AsyncEmitter = require('gemini-core').events.AsyncEmitter;
 
 exports.mkHermione = (opts = {}) => {
     _.defaults(opts, {
@@ -9,9 +9,13 @@ exports.mkHermione = (opts = {}) => {
         browsers: {}
     });
 
-    const hermione = new EventEmitter();
+    const hermione = new AsyncEmitter();
 
-    hermione.events = {AFTER_TESTS_READ: 'AFTER_TESTS_READ'};
+    hermione.events = {
+        AFTER_TESTS_READ: 'AFTER_TESTS_READ',
+        INIT: 'INIT'
+    };
+    hermione.isWorker = () => opts.proc !== 'master';
 
     return hermione;
 };

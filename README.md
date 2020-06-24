@@ -18,11 +18,12 @@ npm install hermione-browser-version-changer
 Plugin has following configuration:
 
 * **enabled** (optional) `Boolean` – enable/disable the plugin, by default plugin is enabled;
+* **initStore** (optional) `Function` - allows you to init the store that will be available in a **predicate**;
 * **browsers** (required) `Object` - a list of browsers;
 * **browsers.\<browserId\>** (required) `Object` - dictionary with browser versions;
 * **browsers.\<browserId\>.\<version\>** (required) `Function` - **predicate** to determine a version;
 
-**predicate** it's a function just recieve the `Test` instance and has to return `true` if a test fits to
+**predicate(test, version, store** it's a function that recieve the `Test` instance, browser version, store and has to return `true` if a test fits to
  the current browser version and `false` if not.
 
 Also there is ability to override plugin parameters by CLI options or environment variables
@@ -39,13 +40,17 @@ module.exports = {
         plugins: {
             'hermione-browser-version-changer': {
                 enabled: true,
+                initStore: async () => {
+                    // do some sync or async operation
+                    return {
+                        '70.1': ['title1', 'title2'],
+                        '70.2': ['title3', 'title4'],
+                    };
+                }
                 browsers: {
                     chrome: {
-                        '70.1': (test) => test.title === 'good for 70.1',
-                        '70.2': (test) => test.title === 'good for 70.2',
-                    },
-                    filrefox: {
-                        '80': (test) => test.title === 'good for 80',
+                        '70.1': (test, ver, store) => store[ver].includes(test.title),
+                        '70.2': (test, ver, store) => store[ver].includes(test.title),
                     },
                 }
             }

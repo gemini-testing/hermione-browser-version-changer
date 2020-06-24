@@ -13,6 +13,16 @@ describe('config', () => {
         });
     });
 
+    describe('initStore', () => {
+        it('should throw if it\'s not "function"', () => {
+            assert.throw(() => parseConfig({initStore: {data: 'some'}}));
+        });
+
+        it('should NOT throw if it\'s "function"', () => {
+            assert.doesNotThrow(() => parseConfig({initStore: () => {}}));
+        });
+    });
+
     describe('browsers.<id>.<version>', () => {
         it('should throw if it\'s not "function"', () => {
             assert.throw(() => parseConfig({
@@ -24,7 +34,7 @@ describe('config', () => {
             }));
         });
 
-        it('should NOT throw if it\'s not "function"', () => {
+        it('should NOT throw if it\'s "function"', () => {
             assert.doesNotThrow(() => parseConfig({
                 browsers: {
                     chrome: {
