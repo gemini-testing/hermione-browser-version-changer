@@ -16,8 +16,30 @@ exports.mkHermione = (opts = {}) => {
         INIT: 'INIT'
     };
     hermione.isWorker = () => opts.proc !== 'master';
+    hermione.config = opts.config || exports.mkConfigStub();
 
     return hermione;
+};
+
+exports.mkConfigStub = (opts = {}) => {
+    opts = _.defaults(opts, {
+        browsers: ['some-default-browser'],
+        version: '1.0'
+    });
+
+    const config = {
+        browsers: {}
+    };
+
+    opts.browsers.forEach(function(browserId) {
+        config.browsers[browserId] = {
+            desiredCapabilities: {browserName: browserId, version: opts.version}
+        };
+    });
+
+    config.forBrowser = (browserId) => config.browsers[browserId];
+
+    return config;
 };
 
 exports.mkTestCollection = (tests) => ({
