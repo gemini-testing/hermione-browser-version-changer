@@ -1,7 +1,7 @@
 'use strict';
 
 const plugin = require('../../lib');
-const {mkHermione, mkTestCollection} = require('../utils');
+const {mkHermione, mkConfigStub, mkTestCollection} = require('../utils');
 
 describe('plugin', () => {
     const sandbox = sinon.createSandbox();
@@ -31,7 +31,8 @@ describe('plugin', () => {
     });
 
     it('should set browser versions only if appropriate predicates return true for test', () => {
-        const hermione = mkHermione();
+        const config = mkConfigStub({browsers: ['bro1', 'bro2']});
+        const hermione = mkHermione({config});
         const test = {browserId: 'bro1', name: 'for 72.1'};
         const test1 = {browserId: 'bro1', name: 'for 72.2'};
         const test2 = {browserId: 'bro2', name: 'test2'};
@@ -54,8 +55,25 @@ describe('plugin', () => {
         assert.include(test2, {browserVersion: '1.2'});
     });
 
+    it('should NOT set browser version if test has different version from config', () => {
+        const config = mkConfigStub({browsers: ['bro'], version: '1.0'});
+        const hermione = mkHermione({config});
+        const test = {browserId: 'bro', browserVersion: '1.1'};
+
+        plugin(hermione, {
+            browsers: {
+                bro: {'1.2': () => true}
+            }
+        });
+
+        hermione.emit(hermione.events.AFTER_TESTS_READ, mkTestCollection([test]));
+
+        assert.equal(test.browserVersion, '1.1');
+    });
+
     it('should pass a version to the predicate', () => {
-        const hermione = mkHermione();
+        const config = mkConfigStub({browsers: ['bro1']});
+        const hermione = mkHermione({config});
         const test = {browserId: 'bro1', name: 'some-test-name'};
         const predicateSpy = sinon.spy();
 
@@ -94,7 +112,8 @@ describe('plugin', () => {
     });
 
     it('should init the store and pass it into the predicate', async () => {
-        const hermione = mkHermione();
+        const config = mkConfigStub({browsers: ['bro1']});
+        const hermione = mkHermione({config});
         const test = {browserId: 'bro1', name: 'for 72.1'};
         const predicateSpy = sinon.spy();
 
