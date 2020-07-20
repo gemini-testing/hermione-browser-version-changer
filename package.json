@@ -1,6 +1,6 @@
 {
   "name": "hermione-browser-version-changer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Plugin for hermione to manage browser version for each test",
   "main": "lib/index.js",
   "scripts": {
