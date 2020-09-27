@@ -55,10 +55,10 @@ describe('plugin', () => {
         assert.include(test2, {browserVersion: '1.2'});
     });
 
-    it('should NOT set browser version if test has different version from config', () => {
+    it('should NOT set browser version if it has not overwritten from native helper', () => {
         const config = mkConfigStub({browsers: ['bro'], version: '1.0'});
         const hermione = mkHermione({config});
-        const test = {browserId: 'bro', browserVersion: '1.1'};
+        const test = {browserId: 'bro', browserVersion: '1.1', hasBrowserVersionOverwritten: true};
 
         plugin(hermione, {
             browsers: {
