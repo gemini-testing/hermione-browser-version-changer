@@ -126,7 +126,7 @@ describe('plugin', () => {
             }
         });
 
-        await hermione.emitAndWait(hermione.events.INIT);
+        await hermione.emitAsync(hermione.events.INIT);
         hermione.emit(hermione.events.AFTER_TESTS_READ, mkTestCollection([test]));
 
         assert.calledWith(predicateSpy, sinon.match.any, sinon.match.any, {data: 'some'});
