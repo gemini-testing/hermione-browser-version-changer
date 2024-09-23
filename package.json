@@ -1,6 +1,6 @@
 {
   "name": "@testplane/browser-version-changer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Plugin for testplane to manage browser version for each test",
   "main": "lib/index.js",
   "scripts": {
