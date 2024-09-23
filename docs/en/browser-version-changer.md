@@ -1,23 +1,23 @@
-# hermione-browser-version-changer
+# @testplane/browser-version-changer
 
 ## Overview
 
-Use the `hermione-browser-version-changer` plugin to manage the definition of the browser version for tests.
+Use the `@testplane/browser-version-changer` plugin to manage the definition of the browser version for tests.
 
 ## Install
 
 ```bash
-npm install -D hermione-browser-version-changer
+npm install -D @testplane/browser-version-changer
 ```
 
 ## Setup
 
-Add the plugin to the `plugins` section of the `hermione` config:
+Add the plugin to the `plugins` section of the `testplane` config:
 
 ```javascript
 module.exports = {
     plugins: {
-        'hermione-browser-version-changer': {
+        '@testplane/browser-version-changer': {
             enabled: true,
             initStore: async () => {
                 return {
@@ -33,10 +33,10 @@ module.exports = {
             }
         },
 
-        // other hermione plugins...
+        // other testplane plugins...
     },
 
-    // other hermione settings...
+    // other testplane settings...
 };
 ```
 
@@ -79,14 +79,14 @@ A predicate function that receives the test instance _(test),_ browser version _
 
 ### Passing parameters via the CLI
 
-All plugin parameters that can be defined in the config can also be passed as command line options or through environment variables during Hermione startup. Use the prefix `--browser-version-changer-` for command line options and `hermione_browser_version_changer_` for environment variables. For example:
+All plugin parameters that can be defined in the config can also be passed as command line options or through environment variables during Testplane startup. Use the prefix `--browser-version-changer-` for command line options and `testplane_browser_version_changer_` for environment variables. For example:
 
 ```bash
-npx hermione --browser-version-changer-enabled false
+npx testplane --browser-version-changer-enabled false
 ```
 
 ```bash
-hermione_browser_version_changer_enabled=false npx hermione
+testplane_browser_version_changer_enabled=false npx testplane
 ```
 
 [noop]: https://lodash.com/docs/4.17.15#noop

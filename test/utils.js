@@ -3,22 +3,22 @@
 const _ = require('lodash');
 const EventEmitter2 = require('eventemitter2');
 
-exports.mkHermione = (opts = {}) => {
+exports.mkTestplane = (opts = {}) => {
     _.defaults(opts, {
         proc: 'master',
         browsers: {}
     });
 
-    const hermione = new EventEmitter2();
+    const testplane = new EventEmitter2();
 
-    hermione.events = {
+    testplane.events = {
         AFTER_TESTS_READ: 'AFTER_TESTS_READ',
         INIT: 'INIT'
     };
-    hermione.isWorker = () => opts.proc !== 'master';
-    hermione.config = opts.config || exports.mkConfigStub();
+    testplane.isWorker = () => opts.proc !== 'master';
+    testplane.config = opts.config || exports.mkConfigStub();
 
-    return hermione;
+    return testplane;
 };
 
 exports.mkConfigStub = (opts = {}) => {
