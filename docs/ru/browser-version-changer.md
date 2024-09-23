@@ -1,23 +1,23 @@
-# hermione-browser-version-changer
+# @testplane/browser-version-changer
 
 ## Обзор
 
-Используйте плагин `hermione-browser-version-changer`, чтобы управлять определением версии браузера для тестов.
+Используйте плагин `@testplane/browser-version-changer`, чтобы управлять определением версии браузера для тестов.
 
 ## Установка
 
 ```bash
-npm install -D hermione-browser-version-changer
+npm install -D @testplane/browser-version-changer
 ```
 
 ## Настройка
 
-Необходимо подключить плагин в разделе `plugins` конфига `hermione`:
+Необходимо подключить плагин в разделе `plugins` конфига `testplane`:
 
 ```javascript
 module.exports = {
     plugins: {
-        'hermione-browser-version-changer': {
+        '@testplane/browser-version-changer': {
             enabled: true,
             initStore: async () => {
                 return {
@@ -33,10 +33,10 @@ module.exports = {
             }
         },
 
-        // другие плагины гермионы...
+        // другие плагины Testplane...
     },
 
-    // другие настройки гермионы...
+    // другие настройки Testplane...
 };
 ```
 
@@ -79,14 +79,14 @@ browsers: {
 
 ### Передача параметров через CLI
 
-Все параметры плагина, которые можно определить в конфиге, можно также передать в виде опций командной строки или через переменные окружения во время запуска гермионы. Используйте префикс `--browser-version-changer-` для опций командной строки и `hermione_browser_version_changer_` &mdash; для переменных окружения. Например:
+Все параметры плагина, которые можно определить в конфиге, можно также передать в виде опций командной строки или через переменные окружения во время запуска Testplane. Используйте префикс `--browser-version-changer-` для опций командной строки и `testplane_browser_version_changer_` &mdash; для переменных окружения. Например:
 
 ```bash
-npx hermione --browser-version-changer-enabled false
+npx testplane --browser-version-changer-enabled false
 ```
 
 ```bash
-hermione_browser_version_changer_enabled=false npx hermione
+testplane_browser_version_changer_enabled=false npx testplane
 ```
 
 [noop]: https://lodash.com/docs/4.17.15#noop

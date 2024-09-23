@@ -1,7 +1,7 @@
 {
-  "name": "hermione-browser-version-changer",
-  "version": "0.1.4",
-  "description": "Plugin for hermione to manage browser version for each test",
+  "name": "@testplane/browser-version-changer",
+  "version": "0.0.1",
+  "description": "Plugin for testplane to manage browser version for each test",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint .",
@@ -14,9 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gemini-testing/hermione-browser-version-changer.git"
+    "url": "git+https://github.com/gemini-testing/testplane-browser-version-changer.git"
   },
   "keywords": [
+    "testplane",
     "hermione",
     "plugin",
     "browser",
@@ -25,9 +26,9 @@
   "author": "Tikvach Alexander <unlok@yandex-team.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gemini-testing/hermione-browser-version-changer/issues"
+    "url": "https://github.com/gemini-testing/testplane-browser-version-changer/issues"
   },
-  "homepage": "https://github.com/gemini-testing/hermione-browser-version-changer#readme",
+  "homepage": "https://github.com/gemini-testing/testplane-browser-version-changer#readme",
   "dependencies": {
     "gemini-configparser": "^1.0.0",
     "lodash": "^4.17.15"
